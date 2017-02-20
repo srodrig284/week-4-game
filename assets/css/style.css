@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Pangolin');
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+
+body { font-family: 'Pangolin', cursive; }
+
+.container-background {
+    width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    background-image: url('../images/SW_Background.jpeg');
+    background-position: center;
+    background-size: cover;
+}
+
+.wrapper
+{
+    min-height: 100%;
+    height: auto;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.game-title{
+    font-size: 5em;
+    margin: auto;
+}
+
+
+.character-message {
+    font-size: 2em;
+    margin: auto;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.character-name{
+    font-size: 1.5em;
+    color: white;
+}
+
+.character-pic {
+    width: 100px;
+    height: 100px;
+}
+
+.character {
+    float: left;
+    background-color: black;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.health-points{
+    color: white;
+}
+
+#character-box {
+    padding: 30px;
+    height: 200px;
+}
+
+.clearfix
+{
+    clear: both;
+    overflow: auto;
+}
