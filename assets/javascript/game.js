@@ -34,6 +34,7 @@
 * Your players should be able to win and lose the game no matter what character they choose. The challenge should come from picking the right enemies, not choosing the strongest player.
 */
 $(document).ready(function(){
+    /*JQuery(document).ready(function($){})*/
 
     var characters = [
         {name: "Darth Vader", hp:   150, ap:   8, cap:  15, apm: 0, img: "darth-vader.jpg" },
@@ -43,6 +44,7 @@ $(document).ready(function(){
 
     var player;
     var enemy;
+    var attackRnd = 0;
 
     function setupCharacters(){
         $.each(characters, function (k, value){
@@ -60,16 +62,122 @@ $(document).ready(function(){
 
             $("<div>")
                 .addClass('character')
-                .attr('data-index', k)
+                .data('data-index', k)
                 .append(charName)
                 .append(charPic)
                 .append(healthP)
                 .appendTo("#character-box");
-
         });
+
+        attackRnd = 0;  // reset to zero
+
+        $("#character-message").text("PICK YOUR CHARACTER");
+        $(".character").one('click', setupMyCharacter);
 
     };
 
+    function setupMyCharacter(){
+        player = characters[$(this).data('data-index')];
+        //console.log (player);
+
+        $(this).appendTo("#player-character")
+            .addClass('player');
+
+
+        $("#character-box").children()
+            .appendTo("#enemies-box")
+            .addClass('enemies')
+            .off('click', setupMyCharacter);
+
+        $("<button>")
+            .addClass('letter-button-color letter-button disabled')
+            .text("ATTACK")
+            .appendTo("#button");
+
+        $("#character-message").text("SELECT AN OPPONENT");
+        $(".enemies").one('click', setupOpponent);
+
+    }
+
+    function setupOpponent(){
+        enemy = characters[$(this).data('data-index')];
+
+        $(this).appendTo("#enemy-character")
+            .addClass('enemy')
+            .removeClass('enemies');
+
+        $("#character-message").text("ATTACK... ATTACK... ATTACK...");
+
+        $("#button>")
+            .removeClass('disabled')
+            .on('click', playerAttack);
+
+        //$(".letter-button").on('click', playerAttack);
+
+        $("#enemies-box").children()
+            .off('click', setupOpponent);
+    }
+
+    function playerAttack(){
+        //console.log("got here");
+        //console.log(enemy);
+        //console.log(player);
+        attackRnd++;
+        player.hp = player.hp - enemy.cap;
+        enemy.hp = enemy.hp - (player.ap * attackRnd);
+
+        $("#character-message").html('You attacked ' + enemy.name + ' for ' + player.ap * attackRnd + ' damage!' + '<br>'
+            + enemy.name + ' attacked you back for ' + enemy.cap + ' damage!');
+
+        // update health points for each
+        $("#player-character .character .health-points").html(player.hp);
+        $("#enemy-character .enemy .health-points").html(enemy.hp);
+
+        if(player.hp <= 0){
+            gameOver(false);  // player loses
+            return;
+        }
+        if(enemy.hp <= 0){
+            gameOver(true);  // player wins
+            return;
+        }
+    }
+
+    function gameOver(playerwins){
+        if(playerwins){
+            // if the player won, then
+            // - if more opponents, then remove defeated enemy, then ask to make another selection
+            // - if no more opponents - ask to play again
+            //if ( $('#myfav').children().length > 0 ) {
+            if($("#enemies-box").children().length > 0) {    // are there more opponents? YES...
+                $("#character-message").html('YOU WIN!!!' + '<br>' + 'SELECT ANOTHER OPPONENT.');
+                // disable attack button
+                $("#button>")
+                    .addClass('disabled')
+                    .off('click', playerAttack);
+                // remove the current enemy
+                $("#enemy-character .enemy").remove();
+
+                // add the onclick to enemies to select
+                $("#enemies-box").children()
+                    .one('click', setupOpponent);
+            }
+            else {    // no more opponents
+                $("#character-message").html('YOU WIN!!!' + '<br>' + 'GAME OVER!!!');
+                $("#button>")
+                    .text("PLAY AGAIN")
+                    .one('click', function () {
+                        location.reload()});
+            }
+        }
+        else{   // player lost
+            $("#character-message").html('YOU HAVE BEEN DEFEATED!!!');
+            $("#button>")
+                .text("PLAY AGAIN")
+                .one('click', function () {
+                    location.reload()});
+        }
+    }
 
     setupCharacters();
 

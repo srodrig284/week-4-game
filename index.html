@@ -11,26 +11,61 @@
     <meta name="description" content="Star Wars RPG">
 
     <!-- Bootstrap File -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-    <!--<link rel="icon" href="assets/images/Hangman-Game-red.ico">-->
+    <link rel="icon" href="assets/images/favicon.ico">
 </head>
 
 <body>
   <div class="container-background">
       <div class="wrapper">
         <h1 class="game-title center-text">Star Wars RPG Game</h1>
-        <h2 class="character-message center-text">Pick your character</h2>
+        <h2 id="character-message" class="center-text"></h2>
         <div id="character-box" class="clearfix">
             <!--<div class="character">
-               <p class="character-name"></p>
-               <img class="character-pic"></img>
-               <p class="health-points"></p>
-             </div>-->
+              <p class="character-name"></p>
+              <img class="character-pic"></img>
+              <p class="health-points"></p>
+            </div>-->
+        </div>
+        <div id="enemies-box" class="clearfix">
+            <!--<div class="enemies">
+              <p class="enemies-name"></p>
+              <img class="enemies-pic"></img>
+              <p class="health-points"></p>
+            </div>-->
         </div>
 
+        <div id="war-zone">
+          <div class="row">
+              <div class="col-xs-4">
+                <div id="player-character">
+                    <p class="center-text title-format">Your Fighter</p>
+                      <!--<div class="player">
+                      <p class="character-name"></p>
+                      <img class="character-pic"></img>
+                      <p class="health-points"></p>
+                      </div>-->
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div id="button"></div>
+              </div>
 
+              <div class="col-xs-4">
+                <div id="enemy-character">
+                  <p class="center-text title-format">The Enemy</p>
+                        <!--<div class="enemy">
+                      <p class="character-name"></p>
+                      <img class="character-pic"></img>
+                      <p class="health-points"></p>
+                    </div>-->
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
   </div>
 

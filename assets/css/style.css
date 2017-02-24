@@ -31,44 +31,74 @@ body { font-family: 'Pangolin', cursive; }
 }
 
 
-.character-message {
-    font-size: 2em;
-    margin: auto;
+#character-message {
+    font-size: 25px;
     background-color: black;
     color: whitesmoke;
+    border: 2px solid white;
 }
 
 .center-text {
     text-align: center;
 }
 
+#war-zone {
+    position: relative;
+    width: 75%;
+    margin: 30px auto;
+}
+
 .character-name{
-    font-size: 1.5em;
+    font-size: 1em;
     color: white;
 }
 
 .character-pic {
-    width: 100px;
-    height: 100px;
+    display: block;
+    width: 101px;
+    height: 64px;
 }
 
-.character {
+.character, .enemies {
     float: left;
-    background-color: black;
     padding: 10px;
     margin-right: 20px;
     margin-left: 20px;
 }
 
+.character, .player, .enemy {
+    background-color: black;
+}
+.title-format {
+    background-color: red;
+    color: #000;
+    margin: 10px;
+}
+
+.enemies{
+    background-color: red;
+}
+
+#player-character, #enemy-character {
+    display: inline-block;
+    height: 64px;
+    float: left;
+}
 .health-points{
     color: white;
 }
 
-#character-box {
-    padding: 30px;
-    height: 200px;
+#character-box, #enemies-box {
+    padding: 30px 0 0 0;
 }
 
+
+.letter-button-color {
+    color: black;
+    background-color: yellow;
+    margin: 55px 0 42px 0;
+    font-size: 30px;
+}
 .clearfix
 {
     clear: both;
