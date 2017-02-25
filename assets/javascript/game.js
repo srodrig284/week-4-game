@@ -37,10 +37,10 @@ $(document).ready(function(){
     /*JQuery(document).ready(function($){})*/
 
     var characters = [
-        {name: "Darth Vader", hp:   150, ap:   8, cap:  15, apm: 0, img: "darth-vader.jpg" },
-        {name: "Yoda", hp:   130, ap:   5, cap:  10, apm: 0, img: "Yoda.png" },
-        {name: "Jabba The Hutt", hp:   120, ap:   7, cap:  12, apm: 0, img: "jabba.png" },
-        {name: "Han Solo", hp:   140, ap:   10, cap:  20, apm: 0, img: "Han_Solo.png" }];
+        {name: "Darth Vader", hp:   120, ap:   8, cap:  15, apm: 0, img: "darth-vader.jpg" },
+        {name: "Yoda", hp:   100, ap:   5, cap:  10, apm: 0, img: "Yoda.png" },
+        {name: "Jabba The Hutt", hp:   90, ap:   7, cap:  12, apm: 0, img: "jabba.png" },
+        {name: "Han Solo", hp:   110, ap:   10, cap:  15, apm: 0, img: "Han_Solo.png" }];
 
     var player;
     var enemy;
@@ -119,12 +119,20 @@ $(document).ready(function(){
     }
 
     function playerAttack(){
-        //console.log("got here");
-        //console.log(enemy);
-        //console.log(player);
+
         attackRnd++;
-        player.hp = player.hp - enemy.cap;
+
         enemy.hp = enemy.hp - (player.ap * attackRnd);
+        if(enemy.hp <= 0){
+            gameOver(true);  // player wins
+            return;
+        }
+
+        player.hp = player.hp - enemy.cap;
+        if(player.hp <= 0){
+            gameOver(false);  // player loses
+            return;
+        }
 
         $("#character-message").html('You attacked ' + enemy.name + ' for ' + player.ap * attackRnd + ' damage!' + '<br>'
             + enemy.name + ' attacked you back for ' + enemy.cap + ' damage!');
@@ -132,15 +140,8 @@ $(document).ready(function(){
         // update health points for each
         $("#player-character .character .health-points").html(player.hp);
         $("#enemy-character .enemy .health-points").html(enemy.hp);
+        console.log("player hp: " + player.hp);
 
-        if(player.hp <= 0){
-            gameOver(false);  // player loses
-            return;
-        }
-        if(enemy.hp <= 0){
-            gameOver(true);  // player wins
-            return;
-        }
     }
 
     function gameOver(playerwins){
